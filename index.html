@@ -420,6 +420,120 @@
       line-height: 1.45;
     }
 
+  
+    .portfolio-media-wrap[data-preview-trigger] {
+      cursor: zoom-in;
+    }
+
+    .portfolio-card-actions {
+      margin-top: auto;
+      padding-top: 0.25rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-sm {
+      padding: 0.42rem 0.8rem;
+      font-size: 0.82rem;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .media-canvas-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.78);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .media-canvas-backdrop.is-open {
+      display: flex;
+    }
+
+    .media-canvas-dialog {
+      width: 100%;
+      max-width: 860px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+    }
+
+    .media-canvas-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.85rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-alt);
+    }
+
+    .media-canvas-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .media-canvas-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .canvas-ctrl-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.32rem 0.65rem;
+      border-radius: 7px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .canvas-ctrl-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .media-canvas-stage {
+      padding: 1rem 1.2rem 1.2rem;
+      background: #0b1120;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+      max-height: 76vh;
+    }
+
+    .media-canvas-stage img {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 8px;
+      transition: transform 0.18s ease;
+      transform-origin: center center;
+      display: block;
+    }
+
+    .media-canvas-stage video {
+      width: 100%;
+      max-height: 70vh;
+      border-radius: 8px;
+      display: block;
+      background: #000000;
+    }
+
   </style>
 </head>
 <body>
@@ -538,19 +652,29 @@
       <h2 id="portfolio-heading">Portfolio Screenshots &amp; Demos</h2>
       <div class="portfolio-grid">
         <article class="portfolio-card">
-          <div class="portfolio-media-wrap">
+          <div class="portfolio-media-wrap" data-preview-trigger data-mime="image/jpeg" data-src="./drone.ai-mitsubishi-1.jpeg" data-title="Mitsubishi Drone AI — Detection View 1 (image/jpeg)">
             <img src="./drone.ai-mitsubishi-1.jpeg" alt="Mitsubishi Drone AI Inspection — Screenshot 1" />
           </div>
           <div class="portfolio-title">Mitsubishi Drone AI — Detection View 1</div>
           <p class="portfolio-desc">Autonomous drone object detection capture &amp; S3 pipeline (<code>drone.ai-mitsubishi-1.jpeg</code>, <code>image/jpeg</code>).</p>
+          <div class="portfolio-card-actions">
+            <button type="button" class="btn btn-secondary btn-sm portfolio-preview-btn" data-mime="image/jpeg" data-src="./drone.ai-mitsubishi-1.jpeg" data-title="Mitsubishi Drone AI — Detection View 1 (image/jpeg)">
+              Zoom Image
+            </button>
+          </div>
         </article>
 
         <article class="portfolio-card">
-          <div class="portfolio-media-wrap">
+          <div class="portfolio-media-wrap" data-preview-trigger data-mime="image/jpeg" data-src="./drone.ai-mitsubishi-2.jpeg" data-title="Mitsubishi Drone AI — Detection View 2 (image/jpeg)">
             <img src="./drone.ai-mitsubishi-2.jpeg" alt="Mitsubishi Drone AI Inspection — Screenshot 2" />
           </div>
           <div class="portfolio-title">Mitsubishi Drone AI — Detection View 2</div>
           <p class="portfolio-desc">Outdoor vehicle surface inspection &amp; detection output (<code>drone.ai-mitsubishi-2.jpeg</code>, <code>image/jpeg</code>).</p>
+          <div class="portfolio-card-actions">
+            <button type="button" class="btn btn-secondary btn-sm portfolio-preview-btn" data-mime="image/jpeg" data-src="./drone.ai-mitsubishi-2.jpeg" data-title="Mitsubishi Drone AI — Detection View 2 (image/jpeg)">
+              Zoom Image
+            </button>
+          </div>
         </article>
 
         <article class="portfolio-card">
@@ -562,14 +686,24 @@
           </div>
           <div class="portfolio-title">Avrist Assurance AI Chatbot Demo</div>
           <p class="portfolio-desc">Semantic search &amp; LLM chatbot walkthrough (<code>chabot-avrist-issurance.mp4</code>, <code>video/mp4</code>).</p>
+          <div class="portfolio-card-actions">
+            <button type="button" class="btn btn-secondary btn-sm portfolio-preview-btn" data-mime="video/mp4" data-src="./chabot-avrist-issurance.mp4" data-title="Avrist Assurance AI Chatbot Demo (video/mp4)">
+              Show Video
+            </button>
+          </div>
         </article>
 
         <article class="portfolio-card">
-          <div class="portfolio-media-wrap">
+          <div class="portfolio-media-wrap" data-preview-trigger data-mime="image/jpeg" data-src="./uipath-manulife-fRPA-candidate-verification.jpeg" data-title="Manulife UiPath RPA — Candidate Verification (image/jpeg)">
             <img src="./uipath-manulife-fRPA-candidate-verification.jpeg" alt="Manulife UiPath RPA Candidate Verification" />
           </div>
           <div class="portfolio-title">Manulife UiPath RPA — Candidate Verification</div>
           <p class="portfolio-desc">Automated UiPath RPA workflow &amp; verification snapshot (<code>uipath-manulife-fRPA-candidate-verification.jpeg</code>, <code>image/jpeg</code>).</p>
+          <div class="portfolio-card-actions">
+            <button type="button" class="btn btn-secondary btn-sm portfolio-preview-btn" data-mime="image/jpeg" data-src="./uipath-manulife-fRPA-candidate-verification.jpeg" data-title="Manulife UiPath RPA — Candidate Verification (image/jpeg)">
+              Zoom Image
+            </button>
+          </div>
         </article>
       </div>
     </section>
@@ -578,6 +712,23 @@
       <span>Edwin Warming Gunawan &mdash; <a href="https://edwintea.github.io/cv/" target="_blank" rel="noopener noreferrer">edwintea.github.io/cv</a></span>
       <span>GitHub: <a href="https://github.com/edwintea" target="_blank" rel="noopener noreferrer">github.com/edwintea</a> &bull; <a href="https://www.linkedin.com/in/edwin-warming-gunawan" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
     </footer>
+  </div>
+
+  
+  <div class="media-canvas-backdrop" id="mimeCanvasModal" role="dialog" aria-modal="true" aria-labelledby="mimeCanvasTitle">
+    <div class="media-canvas-dialog">
+      <div class="media-canvas-header">
+        <span class="media-canvas-title" id="mimeCanvasTitle">Media Preview</span>
+        <div class="media-canvas-controls">
+          <button type="button" class="canvas-ctrl-btn" id="canvasZoomOutBtn" title="Zoom Out">&minus;</button>
+          <span class="canvas-ctrl-btn" id="canvasZoomLabel" style="cursor:default;">100%</span>
+          <button type="button" class="canvas-ctrl-btn" id="canvasZoomInBtn" title="Zoom In">+</button>
+          <button type="button" class="canvas-ctrl-btn" id="canvasZoomResetBtn" title="Reset Zoom">Reset</button>
+          <button type="button" class="video-modal-close" id="closeMimeCanvasModal" aria-label="Close preview">&times;</button>
+        </div>
+      </div>
+      <div class="media-canvas-stage" id="mimeCanvasStage"></div>
+    </div>
   </div>
 
   <div class="video-modal-backdrop" id="cvVideoModal" role="dialog" aria-modal="true" aria-labelledby="cvVideoModalTitle">
@@ -636,6 +787,147 @@
         }
       });
     })();
+  </script>
+  <script>
+    (function () {
+      const modal = document.getElementById('mimeCanvasModal');
+      const stage = document.getElementById('mimeCanvasStage');
+      const titleEl = document.getElementById('mimeCanvasTitle');
+      const closeBtn = document.getElementById('closeMimeCanvasModal');
+      const zoomInBtn = document.getElementById('canvasZoomInBtn');
+      const zoomOutBtn = document.getElementById('canvasZoomOutBtn');
+      const zoomResetBtn = document.getElementById('canvasZoomResetBtn');
+      const zoomLabel = document.getElementById('canvasZoomLabel');
+      const zoomControls = [zoomInBtn, zoomOutBtn, zoomResetBtn, zoomLabel];
+
+      let currentZoom = 1;
+      let activeImg = null;
+      let activeVideo = null;
+
+      function applyZoom() {
+        const pct = Math.round(currentZoom * 100) + '%';
+        if (zoomLabel) zoomLabel.textContent = pct;
+        if (activeImg) {
+          activeImg.style.transform = 'scale(' + currentZoom + ')';
+        }
+      }
+
+      function setZoomVisible(visible) {
+        zoomControls.forEach(function (el) {
+          if (el) el.style.display = visible ? '' : 'none';
+        });
+      }
+
+      function openByMime(src, mime, title) {
+        if (!modal || !stage) return;
+        stage.innerHTML = '';
+        activeImg = null;
+        activeVideo = null;
+        currentZoom = 1;
+        applyZoom();
+
+        if (titleEl) {
+          titleEl.textContent = title || 'Media Preview';
+        }
+
+        const cleanMime = (mime || '').toLowerCase().trim();
+        if (cleanMime.startsWith('video/')) {
+          setZoomVisible(false);
+          const video = document.createElement('video');
+          video.controls = true;
+          video.preload = 'metadata';
+          const source = document.createElement('source');
+          source.src = src;
+          source.type = cleanMime;
+          video.appendChild(source);
+          stage.appendChild(video);
+          activeVideo = video;
+          modal.classList.add('is-open');
+          video.play().catch(function () {});
+        } else {
+          setZoomVisible(true);
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = title || 'Preview Image';
+          img.addEventListener('click', function () {
+            currentZoom = currentZoom >= 2 ? 1 : +(currentZoom + 0.5).toFixed(2);
+            applyZoom();
+          });
+          stage.appendChild(img);
+          activeImg = img;
+          modal.classList.add('is-open');
+        }
+      }
+
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.remove('is-open');
+        if (activeVideo) {
+          activeVideo.pause();
+          activeVideo.currentTime = 0;
+        }
+        if (stage) {
+          stage.innerHTML = '';
+        }
+        activeImg = null;
+        activeVideo = null;
+        currentZoom = 1;
+      }
+
+      document.querySelectorAll('.portfolio-preview-btn, [data-preview-trigger]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          const src = el.getAttribute('data-src');
+          const mime = el.getAttribute('data-mime');
+          const title = el.getAttribute('data-title');
+          if (src) {
+            openByMime(src, mime, title);
+          }
+        });
+      });
+
+      if (zoomInBtn) {
+        zoomInBtn.addEventListener('click', function () {
+          if (!activeImg) return;
+          currentZoom = Math.min(3, +(currentZoom + 0.25).toFixed(2));
+          applyZoom();
+        });
+      }
+
+      if (zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', function () {
+          if (!activeImg) return;
+          currentZoom = Math.max(0.5, +(currentZoom - 0.25).toFixed(2));
+          applyZoom();
+        });
+      }
+
+      if (zoomResetBtn) {
+        zoomResetBtn.addEventListener('click', function () {
+          if (!activeImg) return;
+          currentZoom = 1;
+          applyZoom();
+        });
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+      }
+
+      if (modal) {
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
+          closeModal();
+        }
+      });
+    })();
+
   </script>
 </body>
 </html>
