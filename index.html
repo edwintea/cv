@@ -782,20 +782,17 @@
       </div>
       <div class="video-lang-bar" aria-label="Video Language Selection">
         <div class="video-lang-buttons" role="group" aria-label="Select Video Language">
-          <button type="button" class="video-lang-btn" data-lang="bahasa" data-file="./CV-Edwin-Warming-Gunawan-11-2026-bahasa.mp4">Bahasa</button>
+          <button type="button" class="video-lang-btn is-active" data-lang="bahasa" data-file="./CV-Edwin-Warming-Gunawan-11-2026-bahasa.mp4">Bahasa</button>
           <button type="button" class="video-lang-btn" data-lang="english" data-file="./CV-Edwin-Warming-Gunawan-11-2026-english.mp4">English</button>
           <button type="button" class="video-lang-btn" data-lang="japan" data-file="./CV-Edwin-Warming-Gunawan-11-2026-japan.mp4">Japan</button>
           <button type="button" class="video-lang-btn" data-lang="german" data-file="./CV-Edwin-Warming-Gunawan-11-2026-german.mp4">German</button>
           <button type="button" class="video-lang-btn" data-lang="arabic" data-file="./CV-Edwin-Warming-Gunawan-11-2026-arabic.mp4">Arabic</button>
         </div>
-        <span class="video-lang-file" id="cvVideoFileLabel">Pilih bahasa terlebih dahulu</span>
+        <span class="video-lang-file" id="cvVideoFileLabel">./CV-Edwin-Warming-Gunawan-11-2026-bahasa.mp4</span>
       </div>
       <div class="video-modal-body" id="cvVideoBody">
-        <p id="cvVideoPrompt" style="color:#e2e8f0;text-align:center;padding:2rem 1rem;font-size:0.95rem;">
-          Silakan pilih bahasa video terlebih dahulu (Bahasa, English, Japan, German, atau Arabic).
-        </p>
-        <video id="cvVideoPlayer" controls preload="metadata" style="display:none;">
-          <source id="cvVideoSource" src="" type="video/mp4" />
+        <video id="cvVideoPlayer" controls autoplay preload="metadata">
+          <source id="cvVideoSource" src="./CV-Edwin-Warming-Gunawan-11-2026-bahasa.mp4" type="video/mp4" />
           Browser Anda tidak mendukung pemutar video HTML5.
         </video>
       </div>
@@ -809,35 +806,18 @@
       const modal = document.getElementById('cvVideoModal');
       const player = document.getElementById('cvVideoPlayer');
       const sourceEl = document.getElementById('cvVideoSource');
-      const promptEl = document.getElementById('cvVideoPrompt');
       const fileLabel = document.getElementById('cvVideoFileLabel');
       const langButtons = document.querySelectorAll('.video-lang-btn');
 
-      function resetSelection() {
-        langButtons.forEach(function (item) {
-          item.classList.remove('is-active');
-        });
-        if (fileLabel) {
-          fileLabel.textContent = 'Pilih bahasa terlebih dahulu';
-        }
-        if (promptEl) {
-          promptEl.style.display = 'block';
-        }
-        if (player) {
-          player.pause();
-          player.removeAttribute('src');
-          player.style.display = 'none';
-        }
-        if (sourceEl) {
-          sourceEl.setAttribute('src', '');
-        }
-      }
+      const defaultLangBtn = document.querySelector('.video-lang-btn[data-lang="bahasa"]') || langButtons[0];
+      let currentFile = (defaultLangBtn && defaultLangBtn.getAttribute('data-file')) || './CV-Edwin-Warming-Gunawan-11-2026-bahasa.mp4';
 
-      function selectLanguage(btn) {
+      function selectLanguage(btn, shouldPlay) {
         if (!btn) return;
         const file = btn.getAttribute('data-file');
         if (!file) return;
 
+        currentFile = file;
         langButtons.forEach(function (item) {
           item.classList.toggle('is-active', item === btn);
         });
@@ -845,35 +825,40 @@
         if (fileLabel) {
           fileLabel.textContent = file;
         }
-        if (promptEl) {
-          promptEl.style.display = 'none';
-        }
         if (sourceEl) {
           sourceEl.setAttribute('src', file);
           sourceEl.setAttribute('type', 'video/mp4');
         }
         if (player) {
           player.style.display = 'block';
+          player.autoplay = true;
           player.pause();
           player.setAttribute('src', file);
           player.load();
-          player.play().catch(function () {});
+          if (shouldPlay) {
+            player.play().catch(function () {});
+          }
         }
       }
 
       function openModal() {
-        resetSelection();
         modal.classList.add('is-open');
+        selectLanguage(defaultLangBtn, true);
       }
 
       function closeModal() {
         modal.classList.remove('is-open');
-        resetSelection();
+        if (player) {
+          player.pause();
+          player.currentTime = 0;
+        }
       }
+
+      selectLanguage(defaultLangBtn, false);
 
       langButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
-          selectLanguage(btn);
+          selectLanguage(btn, true);
         });
       });
 
