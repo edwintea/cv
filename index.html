@@ -375,6 +375,51 @@
       background: #000000;
     }
 
+  
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .portfolio-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem;
+      background: var(--surface-alt);
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .portfolio-media-wrap {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #0b1120;
+      aspect-ratio: 16 / 10;
+    }
+
+    .portfolio-media-wrap img,
+    .portfolio-media-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .portfolio-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .portfolio-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
   </style>
 </head>
 <body>
@@ -486,6 +531,46 @@
           <li>Built autonomous AI drone inspection workflows with computer vision object detection, OpenCV, and Python/FastAPI streaming imagery and metadata to AWS S3 (Mitsubishi Drone AI Project).</li>
           <li>Developed Flutter (Dart, Dio) mobile apps and Docker/Kubernetes email automation (PT Wisecon Indonesia), Java/React Native voucher systems (PT Aldmic Coopn), CIMB Octo Mobile APIs with Java 21, Spring Boot 3.2, Circuit Breaker &amp; Dynatrace (Appfuxion), SAGA microservices &amp; Odoo on Kubernetes/Terraform/GCP (Bakingworld.id), payment/POS middleware with .NET Core, Spring Boot &amp; RabbitMQ/Pub/Sub (Tabsquare), RCTI portals/queues, and Telkom Nutech e-ticketing/Hadoop.</li>
         </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="portfolio-heading">
+      <h2 id="portfolio-heading">Portfolio Screenshots &amp; Demos</h2>
+      <div class="portfolio-grid">
+        <article class="portfolio-card">
+          <div class="portfolio-media-wrap">
+            <img src="./drone.ai-mitsubishi-1.jpeg" alt="Mitsubishi Drone AI Inspection — Screenshot 1" />
+          </div>
+          <div class="portfolio-title">Mitsubishi Drone AI — Detection View 1</div>
+          <p class="portfolio-desc">Autonomous drone object detection capture &amp; S3 pipeline (<code>drone.ai-mitsubishi-1.jpeg</code>, <code>image/jpeg</code>).</p>
+        </article>
+
+        <article class="portfolio-card">
+          <div class="portfolio-media-wrap">
+            <img src="./drone.ai-mitsubishi-2.jpeg" alt="Mitsubishi Drone AI Inspection — Screenshot 2" />
+          </div>
+          <div class="portfolio-title">Mitsubishi Drone AI — Detection View 2</div>
+          <p class="portfolio-desc">Outdoor vehicle surface inspection &amp; detection output (<code>drone.ai-mitsubishi-2.jpeg</code>, <code>image/jpeg</code>).</p>
+        </article>
+
+        <article class="portfolio-card">
+          <div class="portfolio-media-wrap">
+            <video controls preload="metadata">
+              <source src="./chabot-avrist-issurance.mp4" type="video/mp4" />
+              Browser Anda tidak mendukung pemutar video HTML5.
+            </video>
+          </div>
+          <div class="portfolio-title">Avrist Assurance AI Chatbot Demo</div>
+          <p class="portfolio-desc">Semantic search &amp; LLM chatbot walkthrough (<code>chabot-avrist-issurance.mp4</code>, <code>video/mp4</code>).</p>
+        </article>
+
+        <article class="portfolio-card">
+          <div class="portfolio-media-wrap">
+            <img src="./uipath-manulife-fRPA-candidate-verification.jpeg" alt="Manulife UiPath RPA Candidate Verification" />
+          </div>
+          <div class="portfolio-title">Manulife UiPath RPA — Candidate Verification</div>
+          <p class="portfolio-desc">Automated UiPath RPA workflow &amp; verification snapshot (<code>uipath-manulife-fRPA-candidate-verification.jpeg</code>, <code>image/jpeg</code>).</p>
+        </article>
       </div>
     </section>
 
