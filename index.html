@@ -345,6 +345,53 @@
       color: var(--text);
     }
 
+    .video-lang-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      padding: 0.7rem 1.25rem;
+      background: var(--surface-alt);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .video-lang-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .video-lang-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 0.36rem 0.75rem;
+      border-radius: 7px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .video-lang-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .video-lang-btn.is-active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .video-lang-file {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
     .video-modal-close {
       background: transparent;
       border: 1px solid var(--border);
@@ -737,9 +784,18 @@
         <span class="video-modal-title" id="cvVideoModalTitle">CV Video Introduction — Edwin Warming Gunawan</span>
         <button type="button" class="video-modal-close" id="closeCvVideoModal" aria-label="Close video popup">&times;</button>
       </div>
+      <div class="video-lang-bar" aria-label="Video Language Selection">
+        <div class="video-lang-buttons" role="group" aria-label="Select Video Language">
+          <button type="button" class="video-lang-btn is-active" data-lang="english" data-file="./CV-Edwin-Warming-Gunawan-11-2026-english.mp4">English</button>
+          <button type="button" class="video-lang-btn" data-lang="japan" data-file="./CV-Edwin-Warming-Gunawan-11-2026-japan.mp4">Japan</button>
+          <button type="button" class="video-lang-btn" data-lang="german" data-file="./CV-Edwin-Warming-Gunawan-11-2026-german.mp4">German</button>
+          <button type="button" class="video-lang-btn" data-lang="arabic" data-file="./CV-Edwin-Warming-Gunawan-11-2026-arabic.mp4">Arabic</button>
+        </div>
+        <span class="video-lang-file" id="cvVideoFileLabel">./CV-Edwin-Warming-Gunawan-11-2026-english.mp4</span>
+      </div>
       <div class="video-modal-body">
         <video id="cvVideoPlayer" controls preload="metadata">
-          <source src="./CV-Edwin-Warming-Gunawan-11-2026.mp4" type="video/mp4" />
+          <source id="cvVideoSource" src="./CV-Edwin-Warming-Gunawan-11-2026-english.mp4" type="video/mp4" />
           Browser Anda tidak mendukung pemutar video HTML5.
         </video>
       </div>
@@ -752,10 +808,48 @@
       const closeBtn = document.getElementById('closeCvVideoModal');
       const modal = document.getElementById('cvVideoModal');
       const player = document.getElementById('cvVideoPlayer');
+      const sourceEl = document.getElementById('cvVideoSource');
+      const fileLabel = document.getElementById('cvVideoFileLabel');
+      const langButtons = document.querySelectorAll('.video-lang-btn');
+
+      let currentFile = './CV-Edwin-Warming-Gunawan-11-2026-english.mp4';
+
+      function setLanguage(btn, shouldPlay) {
+        if (!btn) return;
+        const file = btn.getAttribute('data-file');
+        if (!file) return;
+
+        currentFile = file;
+        langButtons.forEach(function (item) {
+          item.classList.toggle('is-active', item === btn);
+        });
+
+        if (fileLabel) {
+          fileLabel.textContent = file;
+        }
+
+        if (sourceEl) {
+          sourceEl.setAttribute('src', file);
+          sourceEl.setAttribute('type', 'video/mp4');
+        }
+
+        if (player) {
+          player.pause();
+          player.setAttribute('src', file);
+          player.load();
+          if (shouldPlay) {
+            player.play().catch(function () {});
+          }
+        }
+      }
 
       function openModal() {
         modal.classList.add('is-open');
         if (player) {
+          if (!player.getAttribute('src')) {
+            player.setAttribute('src', currentFile);
+            player.load();
+          }
           player.play().catch(function () {});
         }
       }
@@ -767,6 +861,12 @@
           player.currentTime = 0;
         }
       }
+
+      langButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setLanguage(btn, true);
+        });
+      });
 
       if (openBtn) {
         openBtn.addEventListener('click', openModal);
