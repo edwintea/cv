@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edwin Warming Gunawan — AI Application Developer &amp; Software Engineer</title>
+  <title>Edwin Warming Gunawan — AI Application Developer &amp; Technical Lead</title>
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg: #f4f7fb;
       --surface: #ffffff;
+      --surface-alt: #f8fafc;
       --text: #0f172a;
       --muted: #475569;
       --border: #e2e8f0;
       --accent: #0f4c81;
-      --accent-hover: #09355c;
-      --tag-bg: #eff6ff;
-      --tag-text: #1e40af;
+      --accent-dark: #093357;
+      --tag-bg: #e8f1fa;
+      --tag-text: #0f4c81;
     }
 
     * {
@@ -32,37 +33,81 @@
     }
 
     .container {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 2.5rem;
-      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.05);
     }
 
     header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
       border-bottom: 1px solid var(--border);
       padding-bottom: 1.75rem;
       margin-bottom: 1.75rem;
     }
 
+    .header-main {
+      flex: 1;
+    }
+
+    .photo-box {
+      flex-shrink: 0;
+      width: 132px;
+      height: 168px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface-alt);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
     h1 {
       font-size: 2rem;
       letter-spacing: -0.02em;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.3rem;
     }
 
     .headline {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--accent);
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .contact-line {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .contact-line a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-line a:hover {
+      text-decoration: underline;
     }
 
     .summary {
       color: var(--muted);
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       text-align: justify;
       margin-bottom: 1.25rem;
     }
@@ -76,11 +121,11 @@
     .btn {
       display: inline-block;
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
       padding: 0.65rem 1.15rem;
       border-radius: 8px;
-      transition: background-color 0.15s ease, border-color 0.15s ease;
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
     }
 
     .btn-primary {
@@ -89,7 +134,7 @@
     }
 
     .btn-primary:hover {
-      background-color: var(--accent-hover);
+      background-color: var(--accent-dark);
     }
 
     .btn-secondary {
@@ -104,7 +149,7 @@
     }
 
     section {
-      margin-bottom: 1.85rem;
+      margin-bottom: 1.9rem;
     }
 
     section:last-child {
@@ -112,7 +157,7 @@
     }
 
     h2 {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--accent);
@@ -123,20 +168,21 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1rem;
     }
 
     .skill-card {
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 1rem;
-      background: #fcfcfd;
+      background: var(--surface-alt);
     }
 
     .skill-card h3 {
       font-size: 0.95rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.55rem;
+      color: var(--text);
     }
 
     .tags {
@@ -150,16 +196,20 @@
       color: var(--tag-text);
       font-size: 0.8rem;
       font-weight: 500;
-      padding: 0.2rem 0.55rem;
+      padding: 0.22rem 0.55rem;
       border-radius: 999px;
     }
 
     .exp-item {
       margin-bottom: 1.35rem;
+      padding-bottom: 1.1rem;
+      border-bottom: 1px dashed var(--border);
     }
 
     .exp-item:last-child {
       margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
     }
 
     .exp-header {
@@ -168,7 +218,7 @@
       align-items: baseline;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
     }
 
     .exp-role {
@@ -184,19 +234,25 @@
 
     ul {
       padding-left: 1.25rem;
-      color: var(--text);
     }
 
     li {
       margin-bottom: 0.35rem;
       font-size: 0.95rem;
+      text-align: justify;
+    }
+
+    .tech-line {
+      margin-top: 0.4rem;
+      font-size: 0.86rem;
+      color: var(--muted);
     }
 
     footer {
       margin-top: 2rem;
       padding-top: 1.25rem;
       border-top: 1px solid var(--border);
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       color: var(--muted);
       display: flex;
       justify-content: space-between;
@@ -204,13 +260,36 @@
       gap: 0.5rem;
     }
 
-    @media (max-width: 600px) {
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 680px) {
       .container {
         padding: 1.5rem 1.15rem;
       }
 
+      header {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+      }
+
+      .summary, li {
+        text-align: left;
+      }
+
+      .actions {
+        justify-content: center;
+      }
+
       h1 {
-        font-size: 1.6rem;
+        font-size: 1.65rem;
       }
     }
   </style>
@@ -218,95 +297,117 @@
 <body>
   <div class="container">
     <header>
-      <h1>Edwin Warming Gunawan</h1>
-      <div class="headline">AI Application Developer &bull; Backend &amp; Distributed Systems Engineer</div>
-      <p class="summary">
-        Software engineer with 15+ years of experience building scalable backend services, enterprise applications,
-        and applied AI solutions. Experienced across Java (Quarkus, Spring Boot), Python, .NET Core, microservices,
-        containerized deployments, large language models, computer vision, and workflow automation.
-      </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="./CV_Edwin_Warming_Gunawan_2026-v20.pdf" target="_blank" rel="noopener noreferrer">
-          Download / View CV (PDF)
-        </a>
-        <a class="btn btn-secondary" href="https://id.jobstreet.com/profiles/edwin-gunawan-6r7ck68t47" target="_blank" rel="noopener noreferrer">
-          JobStreet Profile
-        </a>
+      <div class="header-main">
+        <h1>Edwin Warming Gunawan</h1>
+        <div class="headline">AI Application Developer &bull; Hands-On Technical Lead &bull; Full-Stack &amp; Mobile Architect</div>
+        <div class="contact-line">
+          South Jakarta, Indonesia &bull; +62 857-1058-3303 &bull; edwin.warming@gmail.com<br />
+          Web CV: <a href="https://edwintea.github.io/cv/" target="_blank" rel="noopener noreferrer">edwintea.github.io/cv</a> &bull;
+          GitHub: <a href="https://github.com/edwintea" target="_blank" rel="noopener noreferrer">github.com/edwintea</a> &bull;
+          LinkedIn: <a href="https://www.linkedin.com/in/edwin-warming-gunawan" target="_blank" rel="noopener noreferrer">linkedin.com/in/edwin-warming-gunawan</a>
+        </div>
+        <p class="summary">
+          Hands-on Technical Lead and Senior Software Engineer with over 15 years of active coding and system architecture experience
+          building enterprise software, cross-platform mobile applications (Flutter &amp; React Native), backend microservices,
+          Robotic Process Automation (RPA using UiPath), and production Artificial Intelligence (AI), Large Language Models (LLMs),
+          and Computer Vision systems across insurance, automotive manufacturing, banking, fintech, e-commerce, broadcasting, and public transportation.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="./CV_Edwin_Warming_Gunawan_2026-v22.pdf" target="_blank" rel="noopener noreferrer">
+            Download / View CV (PDF)
+          </a>
+          <a class="btn btn-secondary" href="./CV_Edwin_Warming_Gunawan_2026-v22.docx" download>
+            Download CV (DOCX)
+          </a>
+        </div>
+      </div>
+      <div class="photo-box">
+        <img src="./photo.jpg" alt="Edwin Warming Gunawan" />
       </div>
     </header>
 
     <section aria-labelledby="skills-heading">
-      <h2 id="skills-heading">Core Competencies</h2>
+      <h2 id="skills-heading">Core Technical Skills</h2>
       <div class="skills-grid">
         <div class="skill-card">
-          <h3>AI &amp; Automation</h3>
+          <h3>AI, LLM &amp; Computer Vision</h3>
           <div class="tags">
-            <span class="tag">LLM &amp; Semantic Search</span>
-            <span class="tag">Python &amp; FastAPI</span>
-            <span class="tag">Computer Vision</span>
-            <span class="tag">RPA (UiPath)</span>
+            <span class="tag">LLMs &amp; RAG</span>
+            <span class="tag">Hugging Face</span>
+            <span class="tag">Ollama</span>
+            <span class="tag">Semantic Search</span>
+            <span class="tag">UiPath RPA</span>
+            <span class="tag">KTP OCR &amp; Face Detection</span>
+            <span class="tag">Drone Object Detection</span>
+            <span class="tag">Python, OpenCV, PyTorch</span>
           </div>
         </div>
         <div class="skill-card">
-          <h3>Backend &amp; Microservices</h3>
+          <h3>Backend, Mobile &amp; Frontend</h3>
           <div class="tags">
-            <span class="tag">Quarkus</span>
-            <span class="tag">Java 8–21 &amp; Spring Boot</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">Java 8–21, Spring Boot, Quarkus</span>
             <span class="tag">.NET Core / C#</span>
-            <span class="tag">MongoDB</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Flutter &amp; React Native</span>
+            <span class="tag">ReactJS, Angular, Next.js</span>
           </div>
         </div>
         <div class="skill-card">
-          <h3>Cloud, Mobile &amp; Quality</h3>
+          <h3>Data, Cloud &amp; Quality</h3>
           <div class="tags">
-            <span class="tag">Docker &amp; Kubernetes</span>
-            <span class="tag">Flutter &amp; React</span>
-            <span class="tag">JMeter &amp; Snyk</span>
+            <span class="tag">PostgreSQL, Oracle, SQL Server</span>
+            <span class="tag">MongoDB, Redis</span>
+            <span class="tag">Kafka, RabbitMQ</span>
+            <span class="tag">Docker, Kubernetes, AKS</span>
+            <span class="tag">AWS S3, GCP, Linux</span>
+            <span class="tag">JUnit, Mockito, JMeter, Snyk</span>
           </div>
         </div>
       </div>
     </section>
 
     <section aria-labelledby="experience-heading">
-      <h2 id="experience-heading">Selected Experience &amp; Highlights</h2>
+      <h2 id="experience-heading">Selected Experience &amp; Projects</h2>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-role">AI &amp; Backend Engineering Initiatives</span>
-          <span class="exp-meta">LLM &bull; Computer Vision &bull; Automation</span>
+          <span class="exp-role">AI, LLM, RPA &amp; Backend Engineering (Insurance Domain)</span>
+          <span class="exp-meta">Python &bull; FastAPI &bull; .NET Core &bull; UiPath &bull; AKS</span>
         </div>
         <ul>
-          <li>Built AI-powered assistants and semantic search workflows alongside backend APIs using Python, FastAPI, and container orchestration.</li>
-          <li>Developed computer vision pipelines and drone-integrated object detection workflows with object storage integration.</li>
-          <li>Implemented automated ticketing and robotic process automation (RPA) workflows to reduce manual operational bottlenecks.</li>
+          <li>Engineered automated RPA workflows using UiPath (Studio &amp; Orchestrator) to streamline repetitive administration, document extraction, and reconciliation.</li>
+          <li>Built AI chatbots from scratch with semantic search and vector embeddings, alongside fine-tuned LLMs via Hugging Face and self-hosted Ollama inference engines.</li>
+          <li>Developed automated e-KYC computer vision pipelines (KTP OCR and face detection/biometric verification) and orchestrated containerized services on AKS with Snyk security checks.</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-role">Enterprise Backend &amp; Microservices — Djava Factory</span>
-          <span class="exp-meta">Quarkus &bull; Java &bull; Distributed Systems</span>
+          <span class="exp-role">Enterprise Backend, Microservices &amp; Commerce — Djava Factory</span>
+          <span class="exp-meta">Java 21 &bull; Quarkus &bull; Spring Boot &bull; React Native</span>
         </div>
         <ul>
-          <li>Designed and maintained high-throughput enterprise services using Quarkus and Java across modular microservices architectures.</li>
-          <li>Focused on service reliability, clean integration boundaries, and maintainable production code.</li>
+          <li>Delivered production services and APIs using Java 21, Quarkus, Spring Boot, and React Native across supplier onboarding and payment terminal management workflows.</li>
+          <li>Improved API performance, automated unit/mock testing (JUnit &amp; Mockito), dependency security scanning (Snyk), and load testing (Apache JMeter).</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-role">Full-Stack &amp; Mobile Engineering</span>
-          <span class="exp-meta">Flutter &bull; React &bull; Java &bull; Docker / Kubernetes</span>
+          <span class="exp-role">Autonomous AI Drone Inspection &amp; Mobile / Voucher Systems</span>
+          <span class="exp-meta">Drone SDK &bull; Object Detection &bull; AWS S3 &bull; Flutter &bull; Java</span>
         </div>
         <ul>
-          <li>Delivered voucher management and mobile/web applications using Java, React Native, Flutter, and containerized deployment workflows.</li>
+          <li>Built autonomous AI drone inspection workflows with computer vision object detection and Python/FastAPI pipelines streaming inspection imagery and metadata to AWS S3.</li>
+          <li>Developed Flutter mobile applications with modular architecture and Dio integrations, email automation with Docker/Kubernetes, and Java/React Native voucher management systems.</li>
         </ul>
       </div>
     </section>
 
     <footer>
-      <span>Edwin Warming Gunawan &mdash; Indonesia</span>
-      <span>Published via GitHub Pages</span>
+      <span>Edwin Warming Gunawan &mdash; <a href="https://edwintea.github.io/cv/" target="_blank" rel="noopener noreferrer">edwintea.github.io/cv</a></span>
+      <span>GitHub: <a href="https://github.com/edwintea" target="_blank" rel="noopener noreferrer">github.com/edwintea</a> &bull; <a href="https://www.linkedin.com/in/edwin-warming-gunawan" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
     </footer>
   </div>
 </body>
