@@ -292,7 +292,7 @@
         font-size: 1.65rem;
       }
     }
-  
+
     .btn-video {
       background-color: var(--surface);
       color: var(--accent);
@@ -422,7 +422,6 @@
       background: #000000;
     }
 
-  
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -467,7 +466,6 @@
       line-height: 1.45;
     }
 
-  
     .portfolio-media-wrap[data-preview-trigger] {
       cursor: zoom-in;
     }
@@ -580,7 +578,6 @@
       display: block;
       background: #000000;
     }
-
   </style>
 </head>
 <body>
@@ -606,7 +603,7 @@
             Download / View CV (PDF)
           </a>
           <button type="button" class="btn btn-video" id="openCvVideoBtn">
-            Show Video
+            Video Introduction
           </button>
         </div>
       </div>
@@ -725,7 +722,7 @@
         </article>
 
         <article class="portfolio-card">
-          <div class="portfolio-media-wrap">
+          <div class="portfolio-media-wrap" data-preview-trigger data-mime="video/mp4" data-src="./chabot-avrist-issurance.mp4" data-title="Avrist Assurance AI Chatbot Demo (video/mp4)">
             <video controls preload="metadata">
               <source src="./chabot-avrist-issurance.mp4" type="video/mp4" />
               Browser Anda tidak mendukung pemutar video HTML5.
@@ -761,7 +758,6 @@
     </footer>
   </div>
 
-  
   <div class="media-canvas-backdrop" id="mimeCanvasModal" role="dialog" aria-modal="true" aria-labelledby="mimeCanvasTitle">
     <div class="media-canvas-dialog">
       <div class="media-canvas-header">
@@ -786,16 +782,20 @@
       </div>
       <div class="video-lang-bar" aria-label="Video Language Selection">
         <div class="video-lang-buttons" role="group" aria-label="Select Video Language">
-          <button type="button" class="video-lang-btn is-active" data-lang="english" data-file="./CV-Edwin-Warming-Gunawan-11-2026-english.mp4">English</button>
+          <button type="button" class="video-lang-btn" data-lang="bahasa" data-file="./CV-Edwin-Warming-Gunawan-11-2026-bahasa.mp4">Bahasa</button>
+          <button type="button" class="video-lang-btn" data-lang="english" data-file="./CV-Edwin-Warming-Gunawan-11-2026-english.mp4">English</button>
           <button type="button" class="video-lang-btn" data-lang="japan" data-file="./CV-Edwin-Warming-Gunawan-11-2026-japan.mp4">Japan</button>
           <button type="button" class="video-lang-btn" data-lang="german" data-file="./CV-Edwin-Warming-Gunawan-11-2026-german.mp4">German</button>
           <button type="button" class="video-lang-btn" data-lang="arabic" data-file="./CV-Edwin-Warming-Gunawan-11-2026-arabic.mp4">Arabic</button>
         </div>
-        <span class="video-lang-file" id="cvVideoFileLabel">./CV-Edwin-Warming-Gunawan-11-2026-english.mp4</span>
+        <span class="video-lang-file" id="cvVideoFileLabel">Pilih bahasa terlebih dahulu</span>
       </div>
-      <div class="video-modal-body">
-        <video id="cvVideoPlayer" controls preload="metadata">
-          <source id="cvVideoSource" src="./CV-Edwin-Warming-Gunawan-11-2026-english.mp4" type="video/mp4" />
+      <div class="video-modal-body" id="cvVideoBody">
+        <p id="cvVideoPrompt" style="color:#e2e8f0;text-align:center;padding:2rem 1rem;font-size:0.95rem;">
+          Silakan pilih bahasa video terlebih dahulu (Bahasa, English, Japan, German, atau Arabic).
+        </p>
+        <video id="cvVideoPlayer" controls preload="metadata" style="display:none;">
+          <source id="cvVideoSource" src="" type="video/mp4" />
           Browser Anda tidak mendukung pemutar video HTML5.
         </video>
       </div>
@@ -809,17 +809,35 @@
       const modal = document.getElementById('cvVideoModal');
       const player = document.getElementById('cvVideoPlayer');
       const sourceEl = document.getElementById('cvVideoSource');
+      const promptEl = document.getElementById('cvVideoPrompt');
       const fileLabel = document.getElementById('cvVideoFileLabel');
       const langButtons = document.querySelectorAll('.video-lang-btn');
 
-      let currentFile = './CV-Edwin-Warming-Gunawan-11-2026-english.mp4';
+      function resetSelection() {
+        langButtons.forEach(function (item) {
+          item.classList.remove('is-active');
+        });
+        if (fileLabel) {
+          fileLabel.textContent = 'Pilih bahasa terlebih dahulu';
+        }
+        if (promptEl) {
+          promptEl.style.display = 'block';
+        }
+        if (player) {
+          player.pause();
+          player.removeAttribute('src');
+          player.style.display = 'none';
+        }
+        if (sourceEl) {
+          sourceEl.setAttribute('src', '');
+        }
+      }
 
-      function setLanguage(btn, shouldPlay) {
+      function selectLanguage(btn) {
         if (!btn) return;
         const file = btn.getAttribute('data-file');
         if (!file) return;
 
-        currentFile = file;
         langButtons.forEach(function (item) {
           item.classList.toggle('is-active', item === btn);
         });
@@ -827,44 +845,35 @@
         if (fileLabel) {
           fileLabel.textContent = file;
         }
-
+        if (promptEl) {
+          promptEl.style.display = 'none';
+        }
         if (sourceEl) {
           sourceEl.setAttribute('src', file);
           sourceEl.setAttribute('type', 'video/mp4');
         }
-
         if (player) {
+          player.style.display = 'block';
           player.pause();
           player.setAttribute('src', file);
           player.load();
-          if (shouldPlay) {
-            player.play().catch(function () {});
-          }
-        }
-      }
-
-      function openModal() {
-        modal.classList.add('is-open');
-        if (player) {
-          if (!player.getAttribute('src')) {
-            player.setAttribute('src', currentFile);
-            player.load();
-          }
           player.play().catch(function () {});
         }
       }
 
+      function openModal() {
+        resetSelection();
+        modal.classList.add('is-open');
+      }
+
       function closeModal() {
         modal.classList.remove('is-open');
-        if (player) {
-          player.pause();
-          player.currentTime = 0;
-        }
+        resetSelection();
       }
 
       langButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
-          setLanguage(btn, true);
+          selectLanguage(btn);
         });
       });
 
@@ -1027,7 +1036,9 @@
         }
       });
     })();
-
   </script>
 </body>
 </html>
+```[cite: 1, 2, 3, 4, 5, 6, 7]
+
+Apakah ada bagian lain yang ingin Anda sesuaikan sebelum di-commit dan di-push ke `origin/main`?
